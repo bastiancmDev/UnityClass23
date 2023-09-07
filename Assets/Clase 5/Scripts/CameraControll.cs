@@ -13,11 +13,12 @@ public class CameraControll : MonoBehaviour
 
     void Start()
     {
+        Debug.log('hola soy benjamin');
         _cameras = new List<GameObject>();
 
         var ChildsCount = transform.childCount;
 
-        for(int i = 0; i < ChildsCount; i++)
+        for (int i = 0; i < ChildsCount; i++)
         {
             var child = transform.GetChild(i).gameObject;
             child.SetActive(false);
@@ -30,10 +31,11 @@ public class CameraControll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             int NumberOfCurrentCamera = GetNumberOfCurrentCamera();
-            if(NumberOfCurrentCamera + 1 < _cameras.Count) {
+            if (NumberOfCurrentCamera + 1 < _cameras.Count)
+            {
                 Debug.Log("Numero De Camara a activar" + NumberOfCurrentCamera);
                 SelectCamera(NumberOfCurrentCamera + 1);
             }
@@ -49,9 +51,9 @@ public class CameraControll : MonoBehaviour
     {
         if (CameraNumber < _cameras.Count)
         {
-            for(int i = 0; i < _cameras.Count; i++)
+            for (int i = 0; i < _cameras.Count; i++)
             {
-                if(i == CameraNumber)
+                if (i == CameraNumber)
                 {
                     _cameras[i].SetActive(true);
                 }
@@ -66,13 +68,13 @@ public class CameraControll : MonoBehaviour
             Debug.LogError("Cameras count is lees than CameraNumber");
             return;
         }
-        
+
     }
 
 
     public int GetNumberOfCurrentCamera()
     {
-        for(int i = 0; i < _cameras.Count; i++)
+        for (int i = 0; i < _cameras.Count; i++)
         {
             if (_cameras[i].activeSelf)
             {

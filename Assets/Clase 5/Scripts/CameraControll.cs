@@ -14,7 +14,9 @@ public class CameraControll : MonoBehaviour
     void Start()
     {
         _cameras = new List<GameObject>();
-
+        _cameras = new List<GameObject>();
+        _cameras = new List<GameObject>();
+        //lkasdlk
         var ChildsCount = transform.childCount;
 
         for(int i = 0; i < ChildsCount; i++)

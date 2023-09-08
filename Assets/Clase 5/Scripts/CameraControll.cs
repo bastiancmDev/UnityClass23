@@ -13,7 +13,7 @@ public class CameraControll : MonoBehaviour
 
     void Start()
     {
-        Debug.log('hola soy benjamin');
+
         _cameras = new List<GameObject>();
 
         var ChildsCount = transform.childCount;

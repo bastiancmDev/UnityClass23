@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
 {
+    private void Awake()
+    {
+        Debug.Log("LOG AWAKEEEEEEEEEEEEEEEE  PLAYER");
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {

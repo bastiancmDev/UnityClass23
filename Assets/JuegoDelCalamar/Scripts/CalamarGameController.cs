@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -19,43 +20,70 @@ public class CalamarGameController : MonoBehaviour
     [SerializeField]
     private PlayerMovementController _playerMovementController;
     [SerializeField]
-    private PlatformScript[][] _platforms = new PlatformScript[3][];
+    private PlatformScript[][] _platforms;
+
 
     [SerializeField]
-    private List<PlatformScript> _platformsTemp;
+    private GameObject _platformPrefab;
+
+
+    [SerializeField]
+    private GameObject _playerPrefab;
+
+
+    private Coroutine _currentCoroutine;
+
+    private void Awake()
+    {
+
+        _platforms  = new PlatformScript[3][];
+        Random.InitState(3);
+    }
 
     void Start()
     {
-        _platformsTemp = new List<PlatformScript>(GameObject.FindObjectsOfType<PlatformScript>());
-        _platformsTemp = _platformsTemp.OrderBy(_platform => _platform.GetId()).ToList();
+        int dimension = 4; 
         int currentObject = 0;
         for(int i = 0 ; i < _platforms.Length; i++)
         {
             _platforms[i] = new PlatformScript[3];
+            int RandomNumber = Random.Range(0, 3);
             for (int j = 0; j < _platforms[i].Length; j++)
             {
-                _platforms[i][j] = _platformsTemp[currentObject];
+                PlatformScript currenPlatform = Instantiate(_platformPrefab,new Vector3(j*dimension,0,i*dimension),Quaternion.identity).GetComponent<PlatformScript>();
+                currenPlatform.SetId(currentObject);
+                _platforms[i][j] = currenPlatform;
                 currentObject ++;
+                if(j == RandomNumber)
+                {
+                    _platforms[i][j].SetIsFake(false);
+                }
             }
         }
-        for (int i = 0; i < _platforms.Length; i++)
-        {
-            for (int j = 0; j < _platforms[i].Length; j++)
-            {
-                Debug.Log("curren Object" + _platforms[i][j].GetId());
-            }
-        }
+
+
+       
     }
 
     // Update is called once per frame
     void Update()
     {
+       //if(Input.GetKeyDown(KeyCode.Space)) {
+       //     _currentCoroutine = StartCoroutine(CreateHumans());
+       //}
+
+       //if(Input.GetKeyDown(KeyCode.A))
+       // {
+       //     Debug.Log("STOP COROUNTINE");
+       //     StopCoroutine(_currentCoroutine);
+       // }
         
     }
 
 
     public void OnPlataformClicked(int id)
     {
+        Debug.Log("OnPlataformClicked || CalamarGameController || Click plataform with id " + id );
         TYPE_OF_PLATAFORM TypeOfPlataform = ValidatePosition(id);
         var currentPlataform = GetPlatformScriptFromMatrix(id);
         switch (TypeOfPlataform){
@@ -67,6 +95,7 @@ public class CalamarGameController : MonoBehaviour
                 Debug.Log("Position invalid");
                 break;
             case TYPE_OF_PLATAFORM.CAN_MOVE:
+                Debug.Log("OnPlataformClicked || CalamarGameController || Player move to plataform " + id + " with position " + currentPlataform.GetPosition());
                 _playerMovementController.MovePlayer(currentPlataform.GetPosition());
                 break;
         }
@@ -110,5 +139,30 @@ public class CalamarGameController : MonoBehaviour
 
     }
 
-}
+    IEnumerator MoveCube()
+    {
+        yield return new WaitForSeconds(.1f);
+    }
 
+
+    IEnumerator CreateHumans()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            var human = Instantiate(_playerPrefab);
+            yield return new WaitForSeconds(1); 
+            
+        }
+        Debug.Log("fin de la coroutina");
+    }
+
+
+
+    public void CreateHumansF()
+    {
+        StartCoroutine(CreateHumans());
+    }
+
+    
+
+}

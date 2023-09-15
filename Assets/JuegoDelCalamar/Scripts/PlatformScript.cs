@@ -13,9 +13,13 @@ public class PlatformScript : MonoBehaviour
 
     private CalamarGameController _controller;
 
+    private void Awake()
+    {
+        SetIsFake(true);
+    }
+
     void Start()
     {
-
         
     }
 
@@ -38,9 +42,19 @@ public class PlatformScript : MonoBehaviour
         return _id;
     }
 
+    public void SetId(int id)
+    {
+        this._id = id;
+    }
+
     public bool GetIsFake()
     {
         return _isFake;
+    }
+
+    public void SetIsFake(bool isFake)
+    {
+        _isFake = isFake;
     }
 
     public Vector3 GetPosition()
@@ -56,6 +70,8 @@ public class PlatformScript : MonoBehaviour
             _controller = GameObject.FindObjectOfType<CalamarGameController>();
         }
         _controller.OnPlataformClicked(GetId());
+
+       
     }
 
 }

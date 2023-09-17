@@ -31,6 +31,6 @@ public class PlayerMovementController : MonoBehaviour
 
     public void MovePlayer(Vector3 targetPosition)
     {
-        this.transform.position = new Vector3(targetPosition.x, transform.position.y,targetPosition.z);   
+        this.transform.position = new Vector3(targetPosition.x, transform.position.y,targetPosition.z); // movemos el player a la ubicacion que se pasa
     }
 }

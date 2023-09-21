@@ -77,16 +77,7 @@ public class CalamarGameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       //if(Input.GetKeyDown(KeyCode.Space)) {
-       //     _currentCoroutine = StartCoroutine(CreateHumans());
-       //}
-
-       //if(Input.GetKeyDown(KeyCode.A))
-       // {
-       //     Debug.Log("STOP COROUNTINE");
-       //     StopCoroutine(_currentCoroutine);
-       // }
-        
+        Debug.Log(Input.GetAxis("Horizontal"));
     }
 
     // Funcion que se llama al clickear una Plataforma

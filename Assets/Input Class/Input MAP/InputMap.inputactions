@@ -1,0 +1,144 @@
+{
+    "name": "InputMap",
+    "maps": [
+        {
+            "name": "PlayerMove",
+            "id": "68c00985-5257-4e00-b739-858ba86d1de2",
+            "actions": [
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "b41a54cf-8132-4cae-baf7-b9edd903b9d1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Walk",
+                    "type": "Value",
+                    "id": "6f1a40e9-8e8c-4377-b6bc-d063458b1af7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Fake",
+                    "type": "Button",
+                    "id": "1d9b48d0-f51b-442a-b13e-a6ca0560ab9b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Turn",
+                    "type": "Button",
+                    "id": "dd9dffc0-0f0f-40cd-9fdc-2974669b176c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "38729591-cfe3-4446-afd9-97f251b50790",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Horizontal",
+                    "id": "303f53bd-95c0-439a-a5eb-7795ece4e3de",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "d8c6de35-6568-4338-a1c5-13e90f3ec1b7",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "d3e57233-bcc6-4fa3-9cd0-6efaea5a4885",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Walk",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "a203aa38-a1da-41f3-a543-00fe807d1909",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Fake",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "939b62e2-0a70-4a23-9ec2-448e3054430c",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "OnPlayerFly",
+            "id": "9800bcee-3a7a-4f48-b427-6f3bedab245c",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "2addd372-5fe7-4ed9-afb8-9a525217fd4f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0c3dd017-db0c-454a-81e7-b9d0a9cb5ceb",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

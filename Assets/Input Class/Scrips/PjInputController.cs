@@ -41,10 +41,16 @@ public class PjInputController : MonoBehaviour
 
 
         InputManager.PlayerMove.Jump.performed += Jump;
+        InputManager.PlayerMove.Walk.performed += Walk;
 
     }
 
-    
+    private void Walk(CallbackContext context)
+    {
+        
+    }
+
+
     // Update is called once per frame
     void Update()
     {

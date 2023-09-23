@@ -30,7 +30,7 @@ public class ShotBall : MonoBehaviour
 
     
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision collision) // Activamos el action al colisionar
     {
         if(collision.transform.name.Equals("Cube (1)"))
         {

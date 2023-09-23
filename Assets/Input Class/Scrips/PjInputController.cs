@@ -12,7 +12,7 @@ public class PjInputController : MonoBehaviour
     // Start is called before the first frame update
     Rigidbody rb;
     public InputMap InputManager;
-
+    // InputActionMap _playerMoveAction; // Opcional, crear un action map del que se usara para tener un mejor control de cuales se estan usando.
 
     public List<string> ComboBase;
     public List<List<string>> AllCombos;
@@ -31,17 +31,19 @@ public class PjInputController : MonoBehaviour
 
     void Start()
     {
-        InputManager = new InputMap();
-        InputManager.Enable();
-        AllCombos = new List<List<string>>();
-        rb = GetComponent<Rigidbody>();       
-        ComboBase = new List<string>() {"JUMP","JUMP","JUMP"};
-        AllCombos.Add(ComboBase);
-        ActualInputRegistry = new Queue<InputRegistry>();
+        InputManager = new InputMap(); // Creamos el input map. Muy importante ya que no es una clase global, tendremos que crearla en nuestro script!!
+        InputManager.Enable(); // Activamos el inputManager. Aunque es preferible activar el Action Map solo, si tenemos en playerfly ya configurado estaria funcionando a la par que el playermove.
+        // _playerMoveAction = InputManager.PlayerMove; // Asignamos el action map
+        // _playerMoveAction.Enable(); // iniciamos solo el action map que usaremos
+        AllCombos = new List<List<string>>(); // Creamos una lista de lista de combos.... En resumen una lista que cada casilla tiene una serie de combos osea otra lista xd
+        rb = GetComponent<Rigidbody>(); // Le asignamos el RigidBody de nuestro GameObject. ¡¡Atencion, si no tiene un RB va a tirar un problema!!
+        ComboBase = new List<string>() {"JUMP","JUMP","JUMP"}; // Pre seteamos un combo basico
+        AllCombos.Add(ComboBase); // Agregamos el combo a la lista de combos
+        ActualInputRegistry = new Queue<InputRegistry>(); // Creamos un registro de las teclas precionadas
 
 
-        InputManager.PlayerMove.Jump.performed += Jump;
-        InputManager.PlayerMove.Walk.performed += Walk;
+        InputManager.PlayerMove.Jump.performed += Jump; // Nos suscribimos al evento de performed de jump a la funcion Jump.
+        InputManager.PlayerMove.Walk.performed += Walk; // lo mismo pero con walk
 
     }
 
@@ -54,15 +56,15 @@ public class PjInputController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float horizotal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        transform.position = transform.position + new Vector3 (horizotal, 0, vertical);
+        float horizotal = Input.GetAxis("Horizontal"); // Nos traemos los valores del input Derecha e Izquierda entre 0 y 1
+        float vertical = Input.GetAxis("Vertical"); // Lo mismo pero Delante y Detras
+        
+        transform.position = transform.position + new Vector3 (horizotal, 0, vertical); // Cambiamos la pocicion usando las variables que adquirimos
         
     }
 
 
-    public void Jump(CallbackContext context)
+    public void Jump(CallbackContext context) // Se ejecuta al dispararse el evento de Jump de nuestro ActionMap
     {
         if(context.phase == InputActionPhase.Performed)
         {
@@ -85,7 +87,7 @@ public class PjInputController : MonoBehaviour
 
 
 
-    public void SaveInputEvent(string id)
+    public void SaveInputEvent(string id) // Guardamos el input en nuestro struct para luego agregarlo a la lista de los inputs acutales del combo
     {
         ActualInputRegistry.Enqueue(new InputRegistry { Id = id, Time = DateTime.Now });
     }
@@ -123,7 +125,7 @@ public class PjInputController : MonoBehaviour
     
 }
 
-public struct InputRegistry
+public struct InputRegistry // Struct para guardar los Registros del input
 {
     public string Id;
     public DateTime Time;

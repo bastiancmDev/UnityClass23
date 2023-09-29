@@ -62,6 +62,15 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MouseMov"",
+                    ""type"": ""Value"",
+                    ""id"": ""15084e03-2c3e-4811-ac8e-ff497839d244"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,116 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
                     ""action"": ""Turn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""e0b88308-5059-40a0-b38d-6fbf6961ed64"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c1700e98-b559-4b74-b146-6b6121879586"",
+                    ""path"": ""<Mouse>/delta/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""29cff676-1e17-4776-b9b2-999f2fa81f2d"",
+                    ""path"": ""<Mouse>/delta/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""2afa9cd8-6344-410e-aba8-f98e11eaa06f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4dfd7325-3c8b-4a36-9cba-ed57cd6cda47"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""ff0adaed-3ae9-4e53-97d0-02a6a140c7a7"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""c2e01d40-6166-4ac9-98d1-989742000195"",
+                    ""path"": ""<Joystick>/stick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""58ada92e-3c04-4355-bc95-a3daf0e41352"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""84d9bc66-94c2-418a-9790-41fc5d63b2b3"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0178b184-4e89-4c70-87ed-7472c7b2a141"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseMov"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -170,6 +289,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         m_PlayerMove_Walk = m_PlayerMove.FindAction("Walk", throwIfNotFound: true);
         m_PlayerMove_Fake = m_PlayerMove.FindAction("Fake", throwIfNotFound: true);
         m_PlayerMove_Turn = m_PlayerMove.FindAction("Turn", throwIfNotFound: true);
+        m_PlayerMove_MouseMov = m_PlayerMove.FindAction("MouseMov", throwIfNotFound: true);
         // OnPlayerFly
         m_OnPlayerFly = asset.FindActionMap("OnPlayerFly", throwIfNotFound: true);
         m_OnPlayerFly_Newaction = m_OnPlayerFly.FindAction("New action", throwIfNotFound: true);
@@ -238,6 +358,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerMove_Walk;
     private readonly InputAction m_PlayerMove_Fake;
     private readonly InputAction m_PlayerMove_Turn;
+    private readonly InputAction m_PlayerMove_MouseMov;
     public struct PlayerMoveActions
     {
         private @InputMap m_Wrapper;
@@ -246,6 +367,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         public InputAction @Walk => m_Wrapper.m_PlayerMove_Walk;
         public InputAction @Fake => m_Wrapper.m_PlayerMove_Fake;
         public InputAction @Turn => m_Wrapper.m_PlayerMove_Turn;
+        public InputAction @MouseMov => m_Wrapper.m_PlayerMove_MouseMov;
         public InputActionMap Get() { return m_Wrapper.m_PlayerMove; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -267,6 +389,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Turn.started += instance.OnTurn;
             @Turn.performed += instance.OnTurn;
             @Turn.canceled += instance.OnTurn;
+            @MouseMov.started += instance.OnMouseMov;
+            @MouseMov.performed += instance.OnMouseMov;
+            @MouseMov.canceled += instance.OnMouseMov;
         }
 
         private void UnregisterCallbacks(IPlayerMoveActions instance)
@@ -283,6 +408,9 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
             @Turn.started -= instance.OnTurn;
             @Turn.performed -= instance.OnTurn;
             @Turn.canceled -= instance.OnTurn;
+            @MouseMov.started -= instance.OnMouseMov;
+            @MouseMov.performed -= instance.OnMouseMov;
+            @MouseMov.canceled -= instance.OnMouseMov;
         }
 
         public void RemoveCallbacks(IPlayerMoveActions instance)
@@ -352,6 +480,7 @@ public partial class @InputMap: IInputActionCollection2, IDisposable
         void OnWalk(InputAction.CallbackContext context);
         void OnFake(InputAction.CallbackContext context);
         void OnTurn(InputAction.CallbackContext context);
+        void OnMouseMov(InputAction.CallbackContext context);
     }
     public interface IOnPlayerFlyActions
     {

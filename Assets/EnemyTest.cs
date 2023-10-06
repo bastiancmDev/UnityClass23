@@ -9,6 +9,11 @@ public class EnemyTest : MonoBehaviour
     public ENEMY_TYPE EnemyType;
    
 
+    public void SetSkyBox()
+    {
+        
+    }
+
 
 
 

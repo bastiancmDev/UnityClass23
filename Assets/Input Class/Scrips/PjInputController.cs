@@ -17,15 +17,15 @@ public class PjInputController : MonoBehaviour
     public List<string> ComboBase;
     public List<List<string>> AllCombos;
     public Queue<InputRegistry> ActualInputRegistry;
-    
+    private bool isJumping;
 
     private void OnEnable()
     {
-        
+
     }
     private void OnDisable()
     {
-       
+
     }
 
 
@@ -37,14 +37,33 @@ public class PjInputController : MonoBehaviour
         // _playerMoveAction.Enable(); // iniciamos solo el action map que usaremos
         AllCombos = new List<List<string>>(); // Creamos una lista de lista de combos.... En resumen una lista que cada casilla tiene una serie de combos osea otra lista xd
         rb = GetComponent<Rigidbody>(); // Le asignamos el RigidBody de nuestro GameObject. ¡¡Atencion, si no tiene un RB va a tirar un problema!!
-        ComboBase = new List<string>() {"JUMP","JUMP","JUMP"}; // Pre seteamos un combo basico
+        ComboBase = new List<string>() { "JUMP", "JUMP", "JUMP" }; // Pre seteamos un combo basico
         AllCombos.Add(ComboBase); // Agregamos el combo a la lista de combos
         ActualInputRegistry = new Queue<InputRegistry>(); // Creamos un registro de las teclas precionadas
 
 
-        InputManager.PlayerMove.Jump.performed += Jump; // Nos suscribimos al evento de performed de jump a la funcion Jump.
+        InputManager.PlayerMove.Jump.started += StartJump; // Nos suscribimos al evento de performed de jump a la funcion Jump.
+        InputManager.PlayerMove.Jump.canceled += EndJump; // Nos suscribimos al evento de performed de jump a la funcion Jump.
         InputManager.PlayerMove.Walk.performed += Walk; // lo mismo pero con walk
 
+    }
+
+    private void EndJump(CallbackContext obj)
+    {
+        isJumping = false;
+    }
+
+    private void StartJump(CallbackContext obj)
+    {
+        isJumping = true;
+    }
+
+    void FixedUpdate()
+    {
+        if (isJumping)
+        {
+            //player.addForce(vector3.up * 10);
+        }
     }
 
     private void Walk(CallbackContext context)

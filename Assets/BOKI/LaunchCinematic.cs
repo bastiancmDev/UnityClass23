@@ -16,10 +16,15 @@ public class LaunchCinematic : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)){
-            StartCoroutine(CinamtickTrackMovement());
+           
         }
     }
 
+
+    public void LaunchCimaticCoroutine()
+    {
+        StartCoroutine(CinamtickTrackMovement());
+    }
 
     IEnumerator CinamtickTrackMovement()
     {
@@ -31,5 +36,8 @@ public class LaunchCinematic : MonoBehaviour
             yield return new WaitForSeconds(0.01f);
             position += 0.001f;
         }
+        UIGameController uiController = FindObjectOfType<UIGameController>();
+        uiController.CinematicEnd();
+
     }
 }

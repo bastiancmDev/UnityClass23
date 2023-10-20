@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,16 +10,12 @@ public class SceneController : MonoBehaviour
 
     private List<string> _scenesLoaded;
     public List<string> ScenesLoaded { get => _scenesLoaded; }
-
     private List<string> _scenesToLoad;
-
-
     string _currentScene;
-
     public string CurrentScene { get => _currentScene; }
-
     public static SceneController Instance;
 
+    public Action<float> CurrentSceneLoadingProgress;
 
 
     private void Awake()
@@ -87,15 +84,20 @@ public class SceneController : MonoBehaviour
         SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
     }
 
-    public void LoadSceneAditiveAsync(string SceneName)
+    public void LoadSceneAditiveAsync(string SceneName, bool needLoadingScene = false)
     {
-        _scenesLoaded.Add(SceneName);
-        
-        StartCoroutine(LoadSceneAditiveAsyncCoroutine(SceneName));
+        if (needLoadingScene)
+        {
+            LoadSceneAditive("LoadingScene");
+        }
+        _scenesLoaded.Add(SceneName);        
+        StartCoroutine(LoadSceneAditiveAsyncCoroutine(SceneName, CurrentSceneLoadingProgress));        
     }
 
     IEnumerator LoadSceneAsyncCoroutine(string SceneName)
     {
+        
+
         AsyncOperation loadingNewScene = SceneManager.LoadSceneAsync(SceneName);
         while (!loadingNewScene.isDone)
         {
@@ -111,29 +113,32 @@ public class SceneController : MonoBehaviour
     }
 
 
-    IEnumerator LoadSceneAditiveAsyncCoroutine(string SceneName)
+    IEnumerator LoadSceneAditiveAsyncCoroutine(string SceneName,Action<float> callback, bool needLoadingScene = false)
     {
-
         if(CurrentScene != SceneName)
         {
             AsyncOperation loadingNewScene = SceneManager.LoadSceneAsync(SceneName, LoadSceneMode.Additive);
             while (!loadingNewScene.isDone)
             {
                 Debug.Log("Progres loaded of new scene " + loadingNewScene.progress + SceneName);
+                callback?.Invoke(loadingNewScene.progress);
                 yield return null;
             }
+            callback?.Invoke(2);
 
+            if (needLoadingScene)
+            {
+                UnloadScene("LoadingScene");
+            }
             _currentScene = SceneName;
         }
-
-       
     }
 
     public void BatchSceneLoader(List<string> scenesToLoad)
     {
         foreach (var sceneName in _scenesToLoad)
         {
-            LoadSceneAditiveAsync(sceneName);
+            LoadSceneAditiveAsync(sceneName,false);
         }
     }
 
@@ -163,10 +168,19 @@ public class SceneController : MonoBehaviour
                 float distance = Vector3.Distance(Camera.main.transform.position, loader.transform.position);
                 if(distance < 20)
                 {
-                    LoadSceneAditiveAsync(loader.SceneToLoad);
+                    LoadSceneAditiveAsync(loader.SceneToLoad,false);
                 }
             }
             yield return new WaitForSeconds(2);
         }        
     }
+
+    public void LoadSceneLoading()
+    {
+        
+    } 
+
+
+   
+
 }

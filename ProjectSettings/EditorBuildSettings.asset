@@ -8,13 +8,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes class/Scenes testing/MainSceneToLoad.unity
     guid: cb806cf11122ff34db3612d64511f04f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes class/Scenes testing/City.unity
     guid: 1ec9bc6c26707f746b4d774a8831fee3
-  - enabled: 1
+  - enabled: 0
     path: Assets/BOKI/LowPolyNature/Scenes/DemoScene.unity
     guid: 8fb6346f292198843aa018d9e2c190d3
+  - enabled: 1
+    path: Assets/Audio Class/Audio Test.unity
+    guid: 4123c01d92e2a7742a7725021ecbc6d5
   m_configObjects: {}

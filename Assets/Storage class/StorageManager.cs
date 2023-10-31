@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,6 @@ public class StorageManager : MonoBehaviour
 
     public static StorageManager Instance;
     public string BasePath;
-
     private BinaryFileConverter binaryFileConverter;
 
     private void Awake()
@@ -36,6 +36,8 @@ public class StorageManager : MonoBehaviour
     private void Start()
     {
         LoadPlayerDaraFromBinary();
+        Action testSaveDataDelegate = TestSaveData;
+        EventSystemManager.Instance.AddAction(ACTIONSYSTEM.TESTSAVEDATA, testSaveDataDelegate);
     }
 
 

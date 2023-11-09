@@ -46,6 +46,9 @@ public class EventSystemManager : MonoBehaviour
 
     public void AddAction(ACTIONSYSTEM actionKey,Delegate action) 
     {
+        
+
+
         if (!Actions.TryAdd(actionKey, action))
         {
             Actions[actionKey] = action;
@@ -53,7 +56,8 @@ public class EventSystemManager : MonoBehaviour
     }
 
     public object TriggerAction(ACTIONSYSTEM actionKey, params object[] args)
-    {
+    {        
+
         if(Actions.TryGetValue(actionKey, out var value))
         {
              return value?.DynamicInvoke(args);
@@ -73,6 +77,9 @@ public class EventSystemManager : MonoBehaviour
     {        
         return name;
     }
+
+
+    
 
 
 

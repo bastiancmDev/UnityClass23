@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,6 +58,7 @@ namespace BOKI.LowPolyNature.Scripts
             
             fadeOutAtSeconds.RemoveAt(0);
             FadeOut();
+
         }
 
         private void FadeIn()

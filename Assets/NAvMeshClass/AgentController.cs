@@ -7,11 +7,14 @@ public class AgentController : MonoBehaviour
 {
     // Start is called before the first frame update
     private NavMeshAgent _agent;
+    private LineRenderer _lineRenderer;
     public Transform obj;
+    public int positions = 0;
     void Start()
     {
         _agent = gameObject.GetComponent<NavMeshAgent>();
-        //_agent.SetDestination(obj.position);
+        _lineRenderer = gameObject.GetComponent<LineRenderer>();
+        StartCoroutine(DrawLines());
     }
 
     // Update is called once per frame
@@ -28,4 +31,21 @@ public class AgentController : MonoBehaviour
             }
         }
     }
+
+    IEnumerator DrawLines()
+    {
+
+        while (true)
+        {
+            if (_lineRenderer != null)
+            {
+                _lineRenderer.positionCount = positions;
+                positions = (positions + 1) % 3;
+                _lineRenderer.SetPosition(positions, gameObject.transform.position);
+            }
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
+
 }
